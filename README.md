@@ -18,18 +18,18 @@
 1. Собрать и запустить докер-контейнер (по инструкции ниже)
 2. Создать супер-пользователя для входа в админку (также можно найти ниже)
 
-Все команды выполняются из папки /backend_v2
+Все команды выполняются из корневой папки проекта
 
 
 ## 1. Запуск docker-контейнера для локальной разработки
 0. Пункт-разъяснение только для бэкэнд-разработчиков:
 Для создания файлов миграции необходима следующая последовательность команд:
-> source ACTIVATE_vars_for_dev.sh
+> source ACTIVATE_vars_for_example.sh
 > python manage.py makemigrations
 > source DEACTIVATE.sh
 
 1. Собрать контейнер
-> docker-compose -f docker-compose.localdev.yml build
+> docker-compose -f docker-compose.example.yml build
 
 2. Запустить контейнер
 > docker-compose -f docker-compose.localdev.yml up
@@ -41,9 +41,9 @@
 > "/usr/sbin/mysqld: ready for connections."
 
 нажимаете 1 раз ctrl+c, дожидаетесь остановки сервиса:
-> Stopping backend_v2_web_1 ... done 
+> Stopping %CONTAINERNAME% ... done 
 
-> Stopping backend_v2_db_1  ... done 
+> Stopping %CONTAINERNAME%  ... done 
 
 Снова запускаете контейнер (п.2)
 
@@ -56,41 +56,5 @@
 #### Добавить суперпользователя (для захода в админку):
 1. Смотрим список запущенных контейнеров командой:
 > docker-compose ps
-2. Находим контейнер с "web" в имени. Добавляем суперпользователя командой (backend_v2_web_1 - имя контейнера из п.1):
-> docker exec -it backend_v2_web_1 python manage.py createsuperuser
-
-
-## 2. Запуск docker-контейнера на сервере для разработки
-
-1. Собрать контейнер
-> docker-compose -f docker-compose.srvdev.yml build
-
-2. Запустить контейнер
-> docker-compose -f docker-compose.srvdev.yml up
-
-#### Остановка контейнера (можно повторно запустить):
-> docker-compose -f docker-compose.srvdev.yml stop
-
-#### Остановка контейнера с удалением контейнера (volume остаются, база тоже)
-> docker-compose -f docker-compose.srvdev.yml down
-
-#### Комментарий
-В отличие от формата запуска "1. Запуск docker-контейнера для локальной разработки", при запуске "2. Запуск docker-контейнера на сервере для разработки" будет использоваться СУБД Amazon RDS.
-
-
-## 3. Запуск на прод сервере
-
-1. Собрать контейнер
-> docker-compose -f docker-compose.srvprod.yml build
-
-2. Запустить контейнер
-> docker-compose -f docker-compose.srvprod.yml up
-
-#### Остановка контейнера (можно повторно запустить):
-> docker-compose -f docker-compose.srvprod.yml stop
-
-#### Остановка контейнера с удалением контейнера (volume остаются, база тоже)
-> docker-compose -f docker-compose.srvprod.yml down
-
-#### Комментарий
-Формат запуска "2. Запуск docker-контейнера на сервере для разработки" отличается от "3. Запуск на прод сервере" тем, что используются тестовая и прод СУБД Amazon RDS.
+2. Находим контейнер с "web" в имени. Добавляем суперпользователя командой (%CONTAINERNAME% - имя контейнера из п.1):
+> docker exec -it %CONTAINERNAME% python manage.py createsuperuser
