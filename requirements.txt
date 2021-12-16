@@ -1,0 +1,22 @@
+# core
+Django==3.2.8
+djangorestframework==3.12.4
+
+# documentation (swagger)
+drf-yasg==1.20.0
+
+# database
+mysqlclient==2.0.1
+django-mysql==3.8.1
+
+# authentication
+PyJWT==2.3.0
+
+# media files
+Pillow==8.4.0
+
+# email sending
+sendgrid==6.8.3
+
+# extra-fields (base64 for photo, etc)
+drf-extra-fields
